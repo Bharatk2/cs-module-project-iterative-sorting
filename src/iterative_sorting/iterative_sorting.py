@@ -22,16 +22,79 @@ def selection_sort(arr):
 
     return arr
 
-arr = [22, 6, 5, 12, 99, 100]
-print(selection_sort(arr))
 
 # TO-DO:  implement the Bubble Sort function below
 def bubble_sort(arr):
-    # Your code here
-
+    swaps_occurred = True 
+    # Iterating through the arr and looking at elements two at a time
+    # swapping them if they're out of order
+    # if we do this all the way through, all the elements will
+    # eventually end up in sorted order
+    # we know all the elements are in sorted order when we do a full
+    # pass through the array and perform no swaps.
+    while swaps_occurred:
+        for i in range(len(arr) - 1):
+            if arr[i] > arr[i+1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+    
+    # parallel to selection sort: builds up the sorted portion of the array
+    # starting by putting the largest element at the end of the array 
+    # second-largest at the second-to-last spot, etc.
+    
+    # the number of iteration through the array that we need to make is equal
+    # to the number of elemnents in the array - P(n^2)
+    
 
     return arr
 
+def recursive_bubble_sort(arr, unsorted_length):
+    # hwo do we get closer to a base casE?
+    # each pass shortens the unsorted portion by 1
+   # each
+    # base case8s)
+    # re-use the swaps_occured boolean idea
+    for i in range(unsorted_length - 1):
+        if arr[i] > arr[i+1]:
+            arr[i], arr[i+1] = arr[i+1], arr[i]
+    if unsorted_length > 0:
+        recursive_bubble_sort(arr, unsorted_length - 1)
+arr = [33, 44, 55, 11, 33, 100]
+print(recursive_bubble_sort(arr, len(arr)))
+
+# the partition function handles the work of
+# selecting a pivot element and partitioning
+# the data in the array around that pivot
+# returns the left partition, the pivot, and the right partition.
+def partition(arr):
+    # pick the first element as the pivot element
+    pivot = arr[0]
+    left = []
+    right = []
+
+    # iterate through the rest of the array, putting each
+    # element in the appropriate bucket
+    for x in arr[1:]:
+        if x <= pivot:
+            left.append(x)
+        else:
+            right.append(x)
+
+    return left, pivot, right
+def quicksort(arr):
+    # base case
+    # if the length of the array is 0
+    if len(arr) <= 1:
+        return arr
+
+    #how do we get closer to our base casde?
+    left, pivot, right = partition(arr)
+
+    return quicksort(left) + [pivot] + quicksort(right)
+    # the boolean tells us when the unsorted portion of
+
+arr = [13, 9, 55, 100, 22, 33]
+
+print(quicksort(arr))
 '''
 STRETCH: implement the Counting Sort function below
 
